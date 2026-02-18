@@ -22,9 +22,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+ const navLinks = [
     { href: "#about", label: "about" },
     { href: "#projects", label: "projects" },
+    { href: "/resume", label: "resume" },  // ← tambah ini
     { href: "#contact", label: "contact" },
   ];
 
