@@ -33,7 +33,7 @@ const educationList: Education[] = [
     location: "Indramayu, Jawa Barat",
     experiences: [
     "Mengembangkan website kalkulator profit trading di game Growtopia",
-    "Mulai belajar web development secara otodidak",
+    "Mulai belajar web development secara otodidak ",
     ],
   },
 ];
