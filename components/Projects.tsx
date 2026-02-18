@@ -2,20 +2,17 @@
 
 import { useState } from "react";
 
-// ─── Tipe Data Project ─────────────────────────────────────────────────────────
 type Project = {
-  type: string;       // kategori project, misal "Web App", "Landing Page"
-  title: string;      // nama project
-  desc: string;       // deskripsi singkat
-  tags: string[];     // teknologi yang dipakai
-  demo?: string;      // link live demo (opsional)
-  github?: string;    // link GitHub (opsional)
-  wip?: boolean;      // true = Work In Progress (tampilan beda)
+  type: string;
+  title: string;
+  desc: string;
+  tags: string[];
+  demo?: string;
+  github?: string;
+  wip?: boolean;
+  icon?: string;
 };
 
-// ─── Data Projects ─────────────────────────────────────────────────────────────
-// Edit bagian ini sesuai project kamu!
-// Tambah objek baru ke array untuk menambah kartu project.
 const projects: Project[] = [
   {
     type: "Web App",
@@ -24,6 +21,7 @@ const projects: Project[] = [
     tags: ["React", "Tailwind", "API"],
     demo: "#",
     github: "#",
+    icon: "🧱",
   },
   {
     type: "Landing Page",
@@ -32,6 +30,7 @@ const projects: Project[] = [
     tags: ["HTML", "CSS", "JavaScript"],
     demo: "#",
     github: "#",
+    icon: "🌿",
   },
   {
     type: "Dashboard",
@@ -40,6 +39,7 @@ const projects: Project[] = [
     tags: ["React", "Chart.js", "REST API"],
     demo: "#",
     github: "#",
+    icon: "💎",
   },
   {
     type: "Coming Soon",
@@ -47,23 +47,22 @@ const projects: Project[] = [
     desc: "Selalu ada yang sedang dibangun. Lagi explore teknologi baru dan bakalan publish secepatnya.",
     tags: ["???"],
     wip: true,
+    icon: "⚙️",
   },
 ];
 
-// ─── Projects Component ────────────────────────────────────────────────────────
 export default function Projects() {
   return (
     <section id="projects" style={styles.section}>
       <div className="section-container">
 
-        {/* ── Section Header ────────────────────────────────────────────────── */}
         <div className="section-header fade-up">
           <span className="section-num">02 //</span>
           <h2 className="section-title">Projects</h2>
           <div className="section-line" />
         </div>
 
-        {/* ── Grid Kartu Project ────────────────────────────────────────────── */}
+        {/* GT inventory-style grid */}
         <div style={styles.grid} className="projects-grid">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
@@ -75,8 +74,6 @@ export default function Projects() {
   );
 }
 
-// ─── ProjectCard Sub-Component ─────────────────────────────────────────────────
-// Dipisah jadi komponen sendiri supaya bisa punya state hover sendiri-sendiri.
 function ProjectCard({ project }: { project: Project }) {
   const [hovered, setHovered] = useState(false);
 
@@ -89,57 +86,110 @@ function ProjectCard({ project }: { project: Project }) {
         ...styles.card,
         ...(project.wip ? styles.cardWip : {}),
         borderColor: hovered && !project.wip
-          ? "rgba(126,255,212,0.3)"
-          : "var(--border)",
-        transform: hovered && !project.wip ? "translateY(-4px)" : "translateY(0)",
+          ? "var(--accent)"
+          : "var(--border2)",
+        transform: hovered && !project.wip
+          ? "translate(-3px, -3px)"
+          : "translate(0, 0)",
+        boxShadow: hovered && !project.wip
+          ? "6px 6px 0px rgba(0,0,0,0.7)"
+          : "4px 4px 0px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Garis atas yang muncul saat hover */}
-      {!project.wip && (
-        <div
-          style={{
-            ...styles.cardTopLine,
-            transform: hovered ? "scaleX(1)" : "scaleX(0)",
-          }}
-        />
-      )}
+      {/* Colored top bar — GT block category colors */}
+      <div style={{
+        ...styles.cardTopBar,
+        background: project.wip
+          ? "repeating-linear-gradient(90deg, var(--border) 0px, var(--border) 8px, transparent 8px, transparent 16px)"
+          : hovered
+          ? "repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 8px, var(--accent2) 8px, var(--accent2) 16px, var(--accent3) 16px, var(--accent3) 24px, transparent 24px, transparent 32px)"
+          : "repeating-linear-gradient(90deg, var(--border2) 0px, var(--border2) 8px, var(--border) 8px, var(--border) 16px)",
+      }} />
 
-      {/* Tipe project */}
-      <div style={styles.projectType}>{project.type}</div>
+      {/* Icon + type row */}
+      <div style={styles.typeRow}>
+        <span style={styles.projectIcon}>{project.icon}</span>
+        <span style={styles.projectType}>{project.type}</span>
+        {project.wip && (
+          <span style={styles.wipBadge}>[ WIP ]</span>
+        )}
+      </div>
 
-      {/* Judul */}
-      <h3 style={styles.projectTitle}>{project.title}</h3>
+      {/* Title */}
+      <h3 style={{
+        ...styles.projectTitle,
+        color: hovered && !project.wip ? "var(--accent)" : "var(--text)",
+      }}>
+        {project.title}
+      </h3>
 
-      {/* Deskripsi */}
+      {/* Desc */}
       <p style={styles.projectDesc}>{project.desc}</p>
 
-      {/* Tags teknologi */}
+      {/* Tags — gem badge style */}
       <div style={styles.tagsRow}>
         {project.tags.map((tag) => (
           <span key={tag} className="tag">{tag}</span>
         ))}
       </div>
 
-      {/* Link Demo & GitHub — hanya tampil kalau bukan WIP */}
+      {/* Links */}
       {!project.wip && (
         <div style={styles.linksRow}>
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" style={styles.projectLink}>
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                ...styles.projectLink,
+                color: hovered ? "var(--accent)" : "var(--muted)",
+                borderColor: hovered ? "rgba(247,201,72,0.4)" : "var(--border)",
+                boxShadow: hovered ? "2px 2px 0px rgba(0,0,0,0.4)" : "2px 2px 0px rgba(0,0,0,0.3)",
+              }}
+            >
               ↗ Live Demo
             </a>
           )}
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" style={styles.projectLink}>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                ...styles.projectLink,
+                color: hovered ? "var(--accent2)" : "var(--muted)",
+                borderColor: hovered ? "rgba(78,203,113,0.4)" : "var(--border)",
+                boxShadow: hovered ? "2px 2px 0px rgba(0,0,0,0.4)" : "2px 2px 0px rgba(0,0,0,0.3)",
+              }}
+            >
               ⌥ GitHub
             </a>
           )}
+        </div>
+      )}
+
+      {/* WIP animated dots */}
+      {project.wip && (
+        <div style={styles.wipRow}>
+          <span style={styles.wipText}>Loading</span>
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              style={{
+                ...styles.wipDot,
+                animationDelay: `${i * 0.3}s`,
+              }}
+            >
+              ■
+            </span>
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
 const styles: Record<string, React.CSSProperties> = {
   section: {
     position: "relative",
@@ -150,69 +200,124 @@ const styles: Record<string, React.CSSProperties> = {
     gridTemplateColumns: "1fr 1fr",
     gap: "1.5rem",
   },
+
+  /* Card — GT inventory slot */
   card: {
     background: "var(--surface)",
-    border: "1px solid var(--border)",
-    borderRadius: "8px",
-    padding: "1.75rem",
+    border: "2px solid var(--border2)",
+    boxShadow: "3px 3px 0px rgba(0,0,0,0.08)",
+    padding: "1.5rem",
     position: "relative",
     overflow: "hidden",
-    transition: "border-color 0.3s ease, transform 0.3s ease",
+    transition: "border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease",
     cursor: "pointer",
   },
   cardWip: {
-    borderStyle: "dashed",
-    opacity: 0.5,
+    opacity: 0.55,
     cursor: "default",
+    borderStyle: "dashed",
   },
-  cardTopLine: {
+
+  /* Pixel top bar */
+  cardTopBar: {
     position: "absolute",
     top: 0,
     left: 0,
     right: 0,
-    height: "2px",
-    background: "linear-gradient(90deg, var(--accent), var(--accent3))",
-    transformOrigin: "left",
-    transition: "transform 0.4s ease",
+    height: "4px",
+    transition: "background 0.2s ease",
+  },
+
+  /* Type row */
+  typeRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    marginBottom: "0.75rem",
+    paddingTop: "0.5rem",
+  },
+  projectIcon: {
+    fontSize: "1.2rem",
+    lineHeight: 1,
   },
   projectType: {
-    fontFamily: "var(--mono)",
-    fontSize: "0.65rem",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.7rem",
     color: "var(--accent3)",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-    marginBottom: "1rem",
+    letterSpacing: "0.1em",
+    textTransform: "uppercase" as const,
+    flex: 1,
   },
+  wipBadge: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.65rem",
+    color: "var(--accent4)",
+    background: "rgba(224,92,42,0.1)",
+    border: "1px solid rgba(224,92,42,0.3)",
+    padding: "2px 6px",
+    animation: "pixelBlink 1.5s steps(1) infinite",
+  },
+
+  /* Title */
   projectTitle: {
-    fontSize: "1.1rem",
-    fontWeight: 700,
-    marginBottom: "0.6rem",
-    letterSpacing: "-0.01em",
-    color: "var(--text)",
-  },
-  projectDesc: {
-    fontFamily: "var(--mono)",
-    fontSize: "0.75rem",
-    color: "var(--muted)",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.85rem",
+    fontWeight: 400,
+    marginBottom: "0.75rem",
     lineHeight: 1.8,
-    marginBottom: "1.5rem",
+    transition: "color 0.15s ease",
+    textShadow: "none",
   },
+
+  /* Desc */
+  projectDesc: {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "1.05rem",
+    color: "var(--muted)",
+    lineHeight: 1.7,
+    marginBottom: "1.25rem",
+  },
+
+  /* Tags */
   tagsRow: {
     display: "flex",
     flexWrap: "wrap" as const,
     gap: "0.4rem",
     marginBottom: "1.25rem",
   },
+
+  /* Links */
   linksRow: {
     display: "flex",
-    gap: "1rem",
+    gap: "0.75rem",
   },
   projectLink: {
-    fontFamily: "var(--mono)",
+    fontFamily: "'Poppins', sans-serif",
     fontSize: "0.7rem",
-    color: "var(--muted)",
     textDecoration: "none",
     letterSpacing: "0.05em",
-    transition: "color 0.2s",
+    padding: "0.4rem 0.75rem",
+    border: "2px solid var(--border)",
+    transition: "color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease",
+  },
+
+  /* WIP loading */
+  wipRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.3rem",
+    marginTop: "0.5rem",
+  },
+  wipText: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.7rem",
+    color: "var(--muted)",
+  },
+  wipDot: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.7rem",
+    color: "var(--accent)",
+    animation: "pixelBlink 0.9s steps(1) infinite",
+    display: "inline-block",
   },
 };

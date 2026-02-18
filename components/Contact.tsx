@@ -2,78 +2,82 @@
 
 import { useState } from "react";
 
-// ─── Tipe Data Social Link ─────────────────────────────────────────────────────
 type SocialLink = {
-  icon: string;     // emoji/karakter ikon
-  name: string;     // nama platform
-  handle: string;   // username/handle yang ditampilkan
-  url: string;      // link tujuan
+  icon: string;
+  name: string;
+  handle: string;
+  url: string;
+  color: string;
 };
 
-// ─── Data Social Links ─────────────────────────────────────────────────────────
-// Edit bagian ini sesuai akun social media kamu!
 const socialLinks: SocialLink[] = [
   {
     icon: "⌥",
     name: "GitHub",
     handle: "hitam12-aw",
     url: "https://github.com/hitam12-aw",
+    color: "#f0e8d0",
   },
   {
     icon: "wa",
     name: "Whatsapp",
     handle: "+6285150003725",
     url: "https://wa.me/6285150003725",
+    color: "#4ecb71",
   },
   {
     icon: "ig",
     name: "Instagram",
     handle: "jordhy_0",
     url: "https://www.instagram.com/jordhy_0?igsh=MTV1NW54cjcyMmU4OQ==",
+    color: "#c44dff",
   },
 ];
 
-// ─── Contact Component ─────────────────────────────────────────────────────────
-// Section kontak berisi teks ajakan, email, dan daftar social media.
 export default function Contact() {
   return (
     <section id="contact" style={styles.section}>
       <div className="section-container">
 
-        {/* ── Section Header ────────────────────────────────────────────────── */}
         <div className="section-header fade-up">
           <span className="section-num">03 //</span>
           <h2 className="section-title">Contact</h2>
           <div className="section-line" />
         </div>
 
-        {/* ── Grid: Teks + Social ───────────────────────────────────────────── */}
         <div style={styles.grid} className="contact-wrapper">
 
-          {/* Kolom kiri: teks & email */}
+          {/* Left col */}
           <div className="fade-up">
-            <h3 style={styles.contactHeading}>
-              Let&apos;s build
-              <br />
-              <span style={{ color: "var(--accent)" }}>something cool.</span>
-            </h3>
+            {/* GT dialogue box style */}
+            <div style={styles.dialogueBox}>
+              <div style={styles.dialogueHeader}>
+                <span style={styles.dialogueTitle}>[ MESSAGE ]</span>
+                <span style={styles.dialogueDots}>▼</span>
+              </div>
+              <h3 style={styles.contactHeading}>
+                Let&apos;s build
+                <br />
+                <span style={{ color: "var(--accent)" }}>something cool.</span>
+              </h3>
+              <p style={styles.contactDesc}>
+                Lagi terbuka untuk kesempatan magang. Kalau kamu recruiter atau
+                bagian dari tim yang keren, jangan ragu buat reach out!
+              </p>
+            </div>
 
-            <p style={styles.contactDesc}>
-              Lagi terbuka untuk kesempatan magang. Kalau kamu recruiter atau
-              bagian dari tim yang keren, jangan ragu buat reach out!
-            </p>
-
-            {/* Ganti email di sini */}
-            <a
-              href="mailto:emailkamu@gmail.com"
-              style={styles.emailLink}
-            >
-              ✉ 2307093@student.polindra.ac.id
+            <a href="mailto:2307093@student.polindra.ac.id" style={styles.emailLink}>
+              <span style={styles.emailIcon}>✉</span>
+              <span>2307093@student.polindra.ac.id</span>
+              <span style={styles.emailArrow}>→</span>
             </a>
           </div>
 
-          {/* Kolom kanan: daftar social media */}
+          {/* Right col — social links */}
           <div style={styles.socialList} className="fade-up">
+            <div style={styles.socialHeader}>
+              <span style={styles.socialHeaderText}>[ FIND ME AT ]</span>
+            </div>
             {socialLinks.map((social) => (
               <SocialItem key={social.name} social={social} />
             ))}
@@ -85,8 +89,6 @@ export default function Contact() {
   );
 }
 
-// ─── SocialItem Sub-Component ──────────────────────────────────────────────────
-// Kartu social media — hover effect dihandle lewat React state.
 function SocialItem({ social }: { social: SocialLink }) {
   const [hovered, setHovered] = useState(false);
 
@@ -99,34 +101,29 @@ function SocialItem({ social }: { social: SocialLink }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         ...styles.socialCard,
-        borderColor: hovered ? "rgba(126,255,212,0.3)" : "var(--border)",
-        transform: hovered ? "translateX(4px)" : "translateX(0)",
+        borderColor: hovered ? social.color : "var(--border2)",
+        transform: hovered ? "translate(-2px, -2px)" : "translate(0, 0)",
+        boxShadow: hovered
+          ? `4px 4px 0px ${social.color}66`
+          : "4px 4px 0px rgba(0,0,0,0.5)",
       }}
     >
-      {/* Ikon */}
-      <div style={styles.socialIcon}>{social.icon}</div>
-
-      {/* Nama & handle */}
+      <div style={{ ...styles.socialIcon, color: hovered ? social.color : "var(--muted)", borderColor: hovered ? social.color : "var(--border)" }}>
+        {social.icon}
+      </div>
       <div style={{ flex: 1 }}>
-        <span style={styles.socialName}>{social.name}</span>
+        <span style={{ ...styles.socialName, color: hovered ? social.color : "var(--text)" }}>
+          {social.name}
+        </span>
         <span style={styles.socialHandle}>{social.handle}</span>
       </div>
-
-      {/* Panah kanan */}
-      <span
-        style={{
-          ...styles.socialArrow,
-          transform: hovered ? "translateX(3px)" : "translateX(0)",
-          color: hovered ? "var(--accent)" : "var(--muted)",
-        }}
-      >
-        →
+      <span style={{ ...styles.socialArrow, color: hovered ? social.color : "var(--muted)" }}>
+        {hovered ? "▶" : "▷"}
       </span>
     </a>
   );
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
 const styles: Record<string, React.CSSProperties> = {
   section: {
     position: "relative",
@@ -138,77 +135,130 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "3rem",
     alignItems: "start",
   },
+
+  /* Dialogue box — GT NPC talk style */
+  dialogueBox: {
+    background: "var(--surface)",
+    border: "2px solid var(--border2)",
+    boxShadow: "3px 3px 0px rgba(0,0,0,0.1)",
+    padding: "1.25rem",
+    marginBottom: "1.5rem",
+    position: "relative",
+  },
+  dialogueHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "0.75rem",
+    paddingBottom: "0.5rem",
+    borderBottom: "2px solid var(--border)",
+  },
+  dialogueTitle: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.7rem",
+    color: "var(--accent)",
+  },
+  dialogueDots: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.5rem",
+    color: "var(--muted)",
+    animation: "pixelBlink 1.2s steps(1) infinite",
+  },
   contactHeading: {
-    fontSize: "1.8rem",
-    fontWeight: 800,
-    letterSpacing: "-0.02em",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.75rem",
+    fontWeight: 400,
     marginBottom: "1rem",
-    lineHeight: 1.2,
+    lineHeight: 2,
     color: "var(--text)",
+    textShadow: "none",
   },
   contactDesc: {
-    fontFamily: "var(--mono)",
-    fontSize: "0.8rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "1.1rem",
     color: "var(--muted)",
-    lineHeight: 1.9,
-    marginBottom: "1.5rem",
+    lineHeight: 1.7,
   },
+
   emailLink: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.5rem",
-    fontFamily: "var(--mono)",
-    fontSize: "0.85rem",
+    gap: "0.75rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "1.1rem",
     color: "var(--accent)",
     textDecoration: "none",
     padding: "0.75rem 1.25rem",
-    border: "1px solid rgba(126,255,212,0.3)",
-    borderRadius: "4px",
-    transition: "background 0.25s, transform 0.25s",
+    border: "2px solid rgba(247,201,72,0.4)",
+    background: "rgba(247,201,72,0.05)",
+    boxShadow: "3px 3px 0px rgba(0,0,0,0.08)",
+    transition: "transform 0.1s ease, box-shadow 0.1s ease",
+    width: "100%",
   },
+  emailIcon: {
+    fontSize: "1.2rem",
+  },
+  emailArrow: {
+    marginLeft: "auto",
+    color: "var(--muted)",
+  },
+
   socialList: {
     display: "flex",
     flexDirection: "column",
-    gap: "1rem",
+    gap: "0.75rem",
   },
+  socialHeader: {
+    borderBottom: "2px solid var(--border)",
+    paddingBottom: "0.5rem",
+    marginBottom: "0.25rem",
+  },
+  socialHeaderText: {
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.7rem",
+    color: "var(--accent)",
+  },
+
   socialCard: {
     display: "flex",
     alignItems: "center",
     gap: "1rem",
-    padding: "1rem 1.25rem",
+    padding: "0.85rem 1rem",
     background: "var(--surface)",
-    border: "1px solid var(--border)",
-    borderRadius: "6px",
+    border: "2px solid var(--border2)",
     textDecoration: "none",
-    transition: "border-color 0.25s ease, transform 0.25s ease",
+    transition: "transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s ease",
+    cursor: "pointer",
   },
   socialIcon: {
     width: "36px",
     height: "36px",
-    background: "rgba(126,255,212,0.08)",
-    borderRadius: "4px",
+    background: "rgba(0,0,0,0.3)",
+    border: "2px solid var(--border)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "1rem",
+    fontSize: "0.85rem",
     flexShrink: 0,
-    color: "var(--text)",
+    fontFamily: "'Poppins', sans-serif",
+    transition: "color 0.15s ease, border-color 0.15s ease",
   },
   socialName: {
-    fontFamily: "var(--mono)",
+    fontFamily: "'Poppins', sans-serif",
     fontSize: "0.75rem",
-    color: "var(--text)",
     letterSpacing: "0.05em",
     display: "block",
-    marginBottom: "2px",
+    marginBottom: "4px",
+    transition: "color 0.15s ease",
   },
   socialHandle: {
-    fontFamily: "var(--mono)",
-    fontSize: "0.65rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.9rem",
     color: "var(--muted)",
   },
   socialArrow: {
-    fontSize: "0.75rem",
-    transition: "transform 0.2s ease, color 0.2s ease",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.5rem",
+    transition: "color 0.15s ease",
   },
 };

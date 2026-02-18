@@ -8,6 +8,7 @@ import { useEffect } from "react";
 
 export default function Home() {
 
+  // Cursor glow
   useEffect(() => {
     const glow = document.createElement("div");
     glow.classList.add("cursor-glow");
@@ -19,13 +20,13 @@ export default function Home() {
     };
 
     window.addEventListener("mousemove", handleMove);
-
     return () => {
       window.removeEventListener("mousemove", handleMove);
       document.body.removeChild(glow);
     };
   }, []);
 
+  // Fade-up & skill bar observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -58,6 +59,8 @@ export default function Home() {
       <div className="section-divider" />
       <Contact />
       <div className="section-divider" />
+
+      {/* Footer — GT style */}
       <footer
         style={{
           maxWidth: "900px",
@@ -66,16 +69,36 @@ export default function Home() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          fontFamily: "var(--mono)",
-          fontSize: "0.7rem",
-          color: "var(--muted)",
         }}
       >
-        <span>
-          <span style={{ color: "var(--accent)" }}></span>
+        <span
+          style={{
+            fontFamily: "'VT323', monospace",
+            fontSize: "1rem",
+            color: "var(--muted)",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <span style={{ color: "var(--accent)" }}>◆</span>
+          Jordhy Rifky Pratama
+          <span style={{ color: "var(--accent)" }}>◆</span>
         </span>
-        <span></span>
+
+        <span
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: "0.4rem",
+            color: "var(--border)",
+          }}
+        >
+          {new Date().getFullYear()} — built with Next.js
+        </span>
       </footer>
+
+      {/* Bottom padding biar konten ga ketutup strip bawah */}
+      <div style={{ height: "8px" }} />
     </>
   );
 }
