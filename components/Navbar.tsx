@@ -23,10 +23,10 @@ export default function Navbar() {
   }, []);
 
  const navLinks = [
-    { href: "#about", label: "about" },
-    { href: "#projects", label: "projects" },
-    { href: "/resume", label: "resume" },  // ← tambah ini
-    { href: "#contact", label: "contact" },
+  { href: "/#about", label: "about" },      // ← tambah / di depan
+  { href: "/#projects", label: "projects" }, // ← tambah / di depan
+  { href: "/resume", label: "resume" },
+  { href: "/#contact", label: "contact" },  
   ];
 
   const handleLinkClick = () => {
