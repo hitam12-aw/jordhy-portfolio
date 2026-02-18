@@ -64,7 +64,7 @@ export default function Projects() {
         </div>
 
         {/* ── Grid Kartu Project ────────────────────────────────────────────── */}
-        <div style={styles.grid}>
+        <div style={styles.grid} className="projects-grid">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}

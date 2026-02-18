@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section style={styles.section}>
+    <section style={styles.section} className="hero">
       <div style={styles.inner}>
 
         <div style={styles.statusBadge}>

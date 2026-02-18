@@ -26,7 +26,7 @@ export default function About() {
           <div className="section-line" />
         </div>
 
-        <div style={styles.grid}>
+        <div style={styles.grid} className="about-grid">
           <div style={styles.bioCol} className="fade-up">
             <p style={styles.bioText}>
               Mahasiswa{" "}

@@ -48,7 +48,7 @@ export default function Contact() {
         </div>
 
         {/* ── Grid: Teks + Social ───────────────────────────────────────────── */}
-        <div style={styles.grid}>
+        <div style={styles.grid} className="contact-wrapper">
 
           {/* Kolom kiri: teks & email */}
           <div className="fade-up">
