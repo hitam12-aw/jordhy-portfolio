@@ -6,25 +6,61 @@ type Skill = {
   color: string;
 };
 
-const skills: Skill[] = [
+const frontendSkills: Skill[] = [
   { label: "HTML & CSS",  value: 80, color: "#e05c2a" },
   { label: "JavaScript", value: 75, color: "#f7c948" },
   { label: "React",       value: 70, color: "#5bb8f5" },
-  { label: "Next.js",     value: 80, color: "#f0e8d0" },
-  { label: "PHP",         value: 75, color: "#c44dff" },
-  { label: "Laravel",     value: 80, color: "#e05c2a" },
+  { label: "Next.js",     value: 80, color: "#a0845a" },
   { label: "Figma",       value: 85, color: "#4ecb71" },
+];
+
+const backendSkills: Skill[] = [
+  { label: "PHP",         value: 80, color: "#c44dff" },
+  { label: "Laravel",     value: 80, color: "#e05c2a" },
+  { label: "MySQL",       value: 85, color: "#00758f" },
 ];
 
 const gemEmoji: Record<string, string> = {
   "HTML & CSS":  "🟧",
   "JavaScript":  "🟨",
   "React":       "🟦",
-  "Next.js":     "⬜",
+  "Next.js":     "🟫",
+  "Figma":       "🟩",
   "PHP":         "🟪",
   "Laravel":     "🟥",
-  "Figma":       "🟩",
+  "MySQL":       "🔵",
 };
+
+// SkillBar sub-component
+function SkillBar({ skill }: { skill: Skill }) {
+  return (
+    <div style={styles.skillItem}>
+      <div style={styles.skillLabel}>
+        <span style={styles.skillName}>
+          {gemEmoji[skill.label]} {skill.label}
+        </span>
+        <span style={{ ...styles.skillPct, color: skill.color }}>
+          {skill.value}%
+        </span>
+      </div>
+      <div style={styles.skillBarOuter}>
+        <div
+          className="skill-fill"
+          style={{
+            height: "100%",
+            width: `${skill.value}%`,
+            background: `linear-gradient(90deg, ${skill.color}99, ${skill.color})`,
+            borderRight: `2px solid ${skill.color}`,
+            transition: "width 0.8s ease",
+          }}
+        />
+        {[25, 50, 75].map((mark) => (
+          <div key={mark} style={{ ...styles.barNotch, left: `${mark}%` }} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
@@ -55,61 +91,50 @@ export default function About() {
 
             <p style={styles.bioText}>
               <span style={styles.highlight}>▶</span>{" "}
-              Mahasiswa{" "}
-              <span style={styles.accentText}>Sistem Informasi Kota Cerdas</span>
-              {" "}/ Politeknik Indramayu, semester 6.
+              6th-semester student of{" "}
+              <span style={styles.accentText}>Smart City Information Systems</span>
+              {" "}at Politeknik Indramayu.
             </p>
             <p style={styles.bioText}>
               <span style={styles.highlight}>▶</span>{" "}
-              Passionate di dunia web, mendalami{" "}
-              <span style={styles.accentText}>JS, PHP, React, Laravel, Next.js</span>.
-            </p>
-            <p style={styles.bioText}>
-              <span style={styles.highlight}>▶</span>{" "}
-              Kode yang bagus itu mudah dibaca, di-maintain, dan berkembang.
-              Tertarik juga sama{" "}
-              <span style={styles.accentText}>desain UI</span> dan aksesibilitas.
-            </p>
-            <p style={styles.bioText}>
-              <span style={styles.highlight}></span>{" "}
-              {" "}
+              Passionate about web development with a strong interest in both{" "}
+              <span style={styles.accentText}>frontend and backend.</span>{" "}
               
+            </p>
+            <p style={styles.bioText}>
+              <span style={styles.highlight}>▶</span>{" "}
+              I believe great code is not just functional — it should be{" "}
+              <span style={styles.accentText}>readable, maintainable, and scalable</span>.
+              I also have a keen interest in{" "}
+              <span style={styles.accentText}>UI design</span> and web accessibility.
+            </p>
+            <p style={styles.bioText}>
+              <span style={styles.highlight}>▶</span>{" "}
+              Currently seeking an{" "}
+              <span style={styles.accentGold}>internship opportunity</span>{" "}
+              to grow alongside an experienced team.
             </p>
           </div>
 
           {/* Skills Column */}
           <div style={styles.skillsCol} className="fade-up">
-            <div style={styles.skillsHeader}>
-              <span style={styles.skillsTitle}>[ SKILL TREE ]</span>
-            </div>
 
-            {skills.map((skill) => (
-              <div key={skill.label} style={styles.skillItem}>
-                <div style={styles.skillLabel}>
-                  <span style={styles.skillName}>
-                    {gemEmoji[skill.label]} {skill.label}
-                  </span>
-                  <span style={{ ...styles.skillPct, color: skill.color }}>
-                    {skill.value}%
-                  </span>
-                </div>
-                <div style={styles.skillBarOuter}>
-                  <div
-                    className="skill-fill"
-                    style={{
-                      height: "100%",
-                      width: `${skill.value}%`,
-                      background: `linear-gradient(90deg, ${skill.color}99, ${skill.color})`,
-                      borderRight: `2px solid ${skill.color}`,
-                      transition: "width 0.8s ease",
-                    }}
-                  />
-                  {[25, 50, 75].map((mark) => (
-                    <div key={mark} style={{ ...styles.barNotch, left: `${mark}%` }} />
-                  ))}
-                </div>
-              </div>
+            {/* Frontend */}
+            <div style={styles.skillsHeader}>
+              <span style={styles.skillsTitle}>[ FRONTEND ]</span>
+            </div>
+            {frontendSkills.map((skill) => (
+              <SkillBar key={skill.label} skill={skill} />
             ))}
+
+            {/* Backend */}
+            <div style={{ ...styles.skillsHeader, marginTop: "1rem" }}>
+              <span style={styles.skillsTitle}>[ BACKEND ]</span>
+            </div>
+            {backendSkills.map((skill) => (
+              <SkillBar key={skill.label} skill={skill} />
+            ))}
+
           </div>
 
         </div>

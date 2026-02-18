@@ -58,29 +58,66 @@ export default function Contact() {
               <h3 style={styles.contactHeading}>
                 Let&apos;s build
                 <br />
-                <span style={{ color: "var(--accent)" }}>something cool.</span>
+                <span style={{ color: "var(--accent)" }}>something great.</span>
               </h3>
               <p style={styles.contactDesc}>
-                Lagi terbuka untuk kesempatan magang. Kalau kamu recruiter atau
-                bagian dari tim yang keren, jangan ragu buat reach out!
+                I am currently open to internship opportunities. If you are a recruiter
+                or part of a great team looking for a dedicated web developer,
+                feel free to reach out — I would love to connect!
               </p>
             </div>
 
             <a href="mailto:2307093@student.polindra.ac.id" style={styles.emailLink}>
               <span style={styles.emailIcon}>✉</span>
-              <span>2307093@student.polindra.ac.id</span>
+              <span>jordhyrifkypratama17@gmail.com</span>
               <span style={styles.emailArrow}>→</span>
             </a>
           </div>
 
-          {/* Right col — social links */}
-          <div style={styles.socialList} className="fade-up">
-            <div style={styles.socialHeader}>
-              <span style={styles.socialHeaderText}>[ FIND ME AT ]</span>
-            </div>
-            {socialLinks.map((social) => (
-              <SocialItem key={social.name} social={social} />
-            ))}
+          {/* Right col — contact form */}
+          <div className="fade-up">
+            <form
+              action="https://formspree.io/f/mqedllbp"
+              method="POST"
+              style={styles.form}
+            >
+              <div style={styles.formGroup}>
+                <label style={styles.label}>NAME</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>EMAIL</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.formGroup}>
+                <label style={styles.label}>MESSAGE</label>
+                <textarea
+                  name="message"
+                  placeholder="Tell me what you want to build..."
+                  required
+                  rows={5}
+                  style={{ ...styles.input, ...styles.textarea }}
+                />
+              </div>
+              <button type="submit" style={styles.submitBtn}>
+                Send Message →
+              </button>
+              <p style={styles.formNote}>
+                Powered by Formspree. Your message goes straight to my inbox.
+              </p>
+            </form>
           </div>
 
         </div>
@@ -203,62 +240,57 @@ const styles: Record<string, React.CSSProperties> = {
     color: "var(--muted)",
   },
 
-  socialList: {
+  form: {
     display: "flex",
-    flexDirection: "column",
-    gap: "0.75rem",
+    flexDirection: "column" as const,
+    gap: "1.25rem",
   },
-  socialHeader: {
-    borderBottom: "2px solid var(--border)",
-    paddingBottom: "0.5rem",
-    marginBottom: "0.25rem",
-  },
-  socialHeaderText: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: "0.7rem",
-    color: "var(--accent)",
-  },
-
-  socialCard: {
+  formGroup: {
     display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-    padding: "0.85rem 1rem",
-    background: "var(--surface)",
-    border: "2px solid var(--border2)",
-    textDecoration: "none",
-    transition: "transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s ease",
-    cursor: "pointer",
+    flexDirection: "column" as const,
+    gap: "0.4rem",
   },
-  socialIcon: {
-    width: "36px",
-    height: "36px",
-    background: "rgba(0,0,0,0.3)",
-    border: "2px solid var(--border)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "0.85rem",
-    flexShrink: 0,
-    fontFamily: "'Poppins', sans-serif",
-    transition: "color 0.15s ease, border-color 0.15s ease",
-  },
-  socialName: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: "0.75rem",
-    letterSpacing: "0.05em",
-    display: "block",
-    marginBottom: "4px",
-    transition: "color 0.15s ease",
-  },
-  socialHandle: {
+  label: {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.9rem",
+    fontSize: "0.65rem",
     color: "var(--muted)",
+    letterSpacing: "0.1em",
   },
-  socialArrow: {
+  input: {
+    width: "100%",
+    padding: "0.75rem 1rem",
+    background: "var(--surface)",
+    border: "1px solid var(--border)",
+    borderRadius: "4px",
+    color: "var(--text)",
     fontFamily: "'Poppins', sans-serif",
-    fontSize: "0.5rem",
-    transition: "color 0.15s ease",
+    fontSize: "0.85rem",
+    outline: "none",
+    transition: "border-color 0.2s ease",
+  },
+  textarea: {
+    resize: "vertical" as const,
+    minHeight: "120px",
+  },
+  submitBtn: {
+    width: "100%",
+    padding: "0.85rem",
+    background: "var(--text)",
+    color: "var(--bg)",
+    border: "none",
+    borderRadius: "4px",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.85rem",
+    fontWeight: 700,
+    cursor: "pointer",
+    transition: "opacity 0.2s ease",
+    letterSpacing: "0.02em",
+  },
+  formNote: {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.6rem",
+    color: "var(--muted)",
+    textAlign: "center" as const,
+    opacity: 0.7,
   },
 };

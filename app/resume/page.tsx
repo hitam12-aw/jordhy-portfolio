@@ -15,23 +15,23 @@ const educationList: Education[] = [
   {
     degree: "Politeknik Indramayu",
     school: "",
-    period: "2022 - Sekarang",
-    location: "Indramayu, Jawa Barat",
+    period: "2022 - Present",
+    location: "Indramayu, West Java",
     gpa: "",
     experiences: [
-      "Mengembangkan 3 sistem berbasis web: Presensi Ormawa, Peta Donor Darah, dan Sistem Peringatan Dini Banjir",
-      "Aktif membangun project untuk meningkatkan kemampuan problem solving dan coding",
-      "Self-learning React, Next.js, Laravel, dan teknologi web modern",
+      "Developed 3 web-based systems: Organization Attendance System, Blood Donor Map, and Flood Early Warning System",
+      "Actively building projects to strengthen problem-solving and coding skills",
+      "Self-learning React, Next.js, Laravel, and modern web technologies",
     ],
   },
   {
     degree: "SMA Negeri 1 Tukdana",
     school: "",
     period: "2019 - 2022",
-    location: "Indramayu, Jawa Barat",
+    location: "Indramayu, West Java",
     experiences: [
-      "Mengembangkan website kalkulator profit trading di game Growtopia",
-      "Mulai belajar web development secara otodidak",
+      "Developed a profit calculator website for trading in the game Growtopia",
+      "Started learning web development independently through self-study",
     ],
   },
 ];
@@ -77,8 +77,8 @@ export default function ResumePage() {
           </div>
           <h1 style={styles.heroTitle}>Education &<br />Experience</h1>
           <p style={styles.heroDesc}>
-            Perjalanan pendidikan dan pengalaman saya di bidang web development
-            dan teknologi.
+            A summary of my academic background and hands-on experience
+            in web development and technology.
           </p>
         </div>
       </section>
@@ -131,7 +131,7 @@ export default function ResumePage() {
                   {edu.experiences && edu.experiences.length > 0 && (
                     <div style={styles.achievementsSection}>
                       <div style={styles.achievementsTitle}>
-                        [ Prestasi & Kegiatan ]
+                        [ Achievements & Activities ]
                       </div>
                       <ul style={styles.achievementsList}>
                         {edu.experiences.map((exp, i) => (

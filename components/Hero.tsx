@@ -10,13 +10,13 @@ export default function Hero() {
           <span style={styles.notifIcon}>🌍</span>
           <span style={styles.notifText}>WORLD: PORTFOLIO — PUBLIC</span>
           <span style={styles.notifSep}>|</span>
-          <span style={styles.notifSub}>Welcome, Guest!</span>
+          <span style={styles.notifSub}>Welcome, Visitor!</span>
         </div>
 
         {/* Status badge */}
         <div style={styles.statusBadge}>
           <span style={styles.statusDot} />
-          <span style={styles.statusText}>Open for internship — 2026</span>
+          <span style={styles.statusText}>Available for Internship — 2026</span>
         </div>
 
         {/* Tag line */}
@@ -27,53 +27,68 @@ export default function Hero() {
 
         {/* Main heading */}
         <h1 style={styles.heading}>
-          <span style={styles.headingSmall}>Halo, saya</span>
+          <span style={styles.headingSmall}>Hi, I&apos;m</span>
           <br />
           <span style={styles.nameHighlight}>Jordhy Rifky Pratama</span>
           <span style={styles.cursor}>▌</span>
         </h1>
 
-        {/* Description panel — GT item info box */}
+        {/* Description panel */}
         <div style={styles.descPanel}>
           <div style={styles.descPanelHeader}>
             <span style={styles.descPanelLabel}>[ INFO ]</span>
           </div>
           <p style={styles.desc}>
-            Mahasiswa yang sedang mendalami{" "}
-            <span style={styles.accentBlue}>web development</span>{" "}
-            dari sisi frontend maupun backend. Fokus belajar{" "}
-            <span style={styles.accentBlue}>
-              JavaScript, PHP, React, Laravel, Next.js,
-            </span>{" "}
-            dan{" "}
-            <span style={styles.accentBlue}>SQL</span>{" "}
-            untuk membangun aplikasi web yang lengkap dan fungsional.
+            A 6th-semester Informatics student with a focus web development. 
+            Currently learning and building responsive interfaces
+            with <span style={styles.accentBlue}>React and Next.js</span> on
+            the frontend, and {" "}
+            <span style={styles.accentBlue}>Laravel and PHP</span> on the
+            backend — always with clean, maintainable code in mind.
           </p>
         </div>
 
         {/* CTA Buttons */}
         <div style={styles.ctaRow}>
           <a href="#projects" className="btn btn-primary">
-            ▶ Lihat Projects
+            ↓ View Projects
           </a>
           <a href="#contact" className="btn btn-outline">
-            ✉ Hubungi Saya
+            ✉ Get In Touch
           </a>
         </div>
 
-        {/* Floating pixel decoration */}
-        <div style={styles.pixelBlocks} aria-hidden="true">
-          {["🌱", "💎", "⭐", "🪨", "🌿"].map((icon, i) => (
-            <span
-              key={i}
-              style={{
-                ...styles.pixelBlock,
-                animationDelay: `${i * 0.4}s`,
-              }}
+        {/* Social Links */}
+        <div style={styles.socialRow}>
+          <span style={styles.socialLabel}>Find me on</span>
+          <div style={styles.socialLinks}>
+            <a
+              href="https://github.com/hitam12-aw"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.socialLink}
             >
-              {icon}
-            </span>
-          ))}
+              GitHub
+            </a>
+            <span style={styles.socialSep}>·</span>
+            <a
+              href="https://www.linkedin.com/in/jordhy-rifky-pratama-858745380/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.socialLink}
+            >
+              LinkedIn
+            </a>
+            <span style={styles.socialSep}>·</span>
+            <a
+              href="https://www.instagram.com/jordhy_0"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styles.socialLink}
+            >
+              Instagram
+            </a>
+          </div>
         </div>
 
       </div>
@@ -105,16 +120,18 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.6rem",
     background: "rgba(78,203,113,0.08)",
-    border: "2px solid rgba(78,203,113,0.25)",
-    boxShadow: "2px 2px 0px rgba(0,0,0,0.08)",
+    border: "1px solid rgba(78,203,113,0.25)",
+    boxShadow: "2px 2px 0px rgba(0,0,0,0.06)",
     padding: "0.4rem 0.85rem",
     width: "fit-content",
   },
-  notifIcon: { fontSize: "0.9rem" },
+  notifIcon: {
+    fontSize: "0.9rem",
+  },
   notifText: {
     fontFamily: "'Poppins', sans-serif",
     fontSize: "0.7rem",
-    color: "#4ecb71",
+    color: "#3a8a4a",
     letterSpacing: "0.08em",
   },
   notifSep: {
@@ -124,7 +141,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   notifSub: {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "0.9rem",
+    fontSize: "0.85rem",
     color: "var(--muted)",
   },
 
@@ -134,9 +151,9 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "0.6rem",
     padding: "0.4rem 0.9rem",
-    background: "rgba(247,201,72,0.07)",
-    border: "2px solid rgba(247,201,72,0.25)",
-    boxShadow: "2px 2px 0px rgba(0,0,0,0.08)",
+    background: "rgba(193,127,36,0.07)",
+    border: "1px solid rgba(193,127,36,0.25)",
+    boxShadow: "2px 2px 0px rgba(0,0,0,0.06)",
     width: "fit-content",
   },
   statusDot: {
@@ -149,7 +166,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   statusText: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: "0.7rem",
+    fontSize: "0.72rem",
     color: "var(--accent)",
     letterSpacing: "0.05em",
   },
@@ -169,10 +186,10 @@ const styles: Record<string, React.CSSProperties> = {
   },
   heroTagText: {
     fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "1.2rem",
+    fontSize: "0.85rem",
     color: "var(--accent)",
     letterSpacing: "0.15em",
-    textTransform: "uppercase" as const,
+    textTransform: "uppercase",
   },
 
   /* Heading */
@@ -189,65 +206,84 @@ const styles: Record<string, React.CSSProperties> = {
   },
   nameHighlight: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: "clamp(1.1rem, 3.5vw, 2rem)",
+    fontSize: "clamp(1.8rem, 5vw, 3rem)",
+    fontWeight: 800,
     color: "var(--accent)",
-    textShadow: "none",
     display: "inline",
-    letterSpacing: "0.02em",
+    letterSpacing: "-0.01em",
   },
   cursor: {
     fontFamily: "'Poppins', sans-serif",
-    fontSize: "clamp(1.1rem, 3.5vw, 2rem)",
+    fontSize: "clamp(1.8rem, 5vw, 3rem)",
     color: "var(--accent)",
-    animation: "pixelBlink 1s steps(1) infinite",
+    animation: "pulse 1s steps(1) infinite",
     display: "inline",
   },
 
   /* Description panel */
   descPanel: {
     background: "var(--surface)",
-    border: "2px solid var(--border2)",
-    boxShadow: "3px 3px 0px rgba(0,0,0,0.08)",
+    border: "1px solid var(--border)",
+    boxShadow: "3px 3px 0px rgba(0,0,0,0.06)",
     padding: "1rem 1.25rem",
-    maxWidth: "520px",
+    maxWidth: "560px",
   },
   descPanelHeader: {
-    borderBottom: "2px solid var(--border)",
+    borderBottom: "1px solid var(--border)",
     paddingBottom: "0.4rem",
     marginBottom: "0.6rem",
   },
   descPanelLabel: {
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: "0.7rem",
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.65rem",
     color: "var(--accent)",
   },
   desc: {
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: "1.15rem",
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: "0.88rem",
     color: "var(--muted)",
-    lineHeight: 1.7,
+    lineHeight: 1.8,
   },
   accentBlue: {
     color: "var(--accent3)",
+    fontWeight: 600,
   },
 
   /* CTA row */
   ctaRow: {
     display: "flex",
     gap: "1rem",
-    flexWrap: "wrap" as const,
+    flexWrap: "wrap",
     marginTop: "0.25rem",
   },
 
-  /* Floating pixel items */
-  pixelBlocks: {
+  /* Social row */
+  socialRow: {
     display: "flex",
-    gap: "1.5rem",
-    marginTop: "1rem",
+    alignItems: "center",
+    gap: "0.75rem",
   },
-  pixelBlock: {
-    fontSize: "1.5rem",
-    animation: "pixelFloat 2.5s ease-in-out infinite",
-    display: "inline-block",
+  socialLabel: {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.7rem",
+    color: "var(--muted)",
+  },
+  socialLinks: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+  },
+  socialLink: {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: "0.7rem",
+    color: "var(--accent)",
+    textDecoration: "none",
+    borderBottom: "1px solid var(--border)",
+    paddingBottom: "1px",
+    transition: "border-color 0.2s ease, color 0.2s ease",
+  },
+  socialSep: {
+    color: "var(--border2)",
+    fontSize: "0.8rem",
   },
 };
