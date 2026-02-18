@@ -9,9 +9,9 @@ const skills: Skill[] = [
   { label: "HTML & CSS",    value: 80 },
   { label: "JavaScript",   value: 75 },
   { label: "React",        value: 70 },
-  { label: "Next.js",      value: 80 },  // ← tambah
+  { label: "Next.js",      value: 80 },
   { label: "PHP",          value: 75 },
-  { label: "Laravel",      value: 80 },  
+  { label: "Laravel",      value: 80 },
   { label: "Figma",        value: 85 },
 ];
 
@@ -32,8 +32,8 @@ export default function About() {
               Mahasiswa{" "}
               <span style={{ color: "var(--accent)" }}>Sistem informasi kota cerdas / Politeknik Indramayu</span>
               , semester 6. Saya passionate dengan dunia web dan suka belajar 
-                teknologi baru baik di sisi frontend maupun backend. Saat ini 
-                sedang mendalami{" "}
+              teknologi baru baik di sisi frontend maupun backend. Saat ini 
+              sedang mendalami{" "}
               <span style={{ color: "var(--accent)" }}>JavaScript, Php, React, Laravel, Next.js</span>.
             </p>
             <p style={styles.bioText}>
@@ -67,9 +67,7 @@ export default function About() {
                       height: "100%",
                       width: `${skill.value}%`,
                       background: "linear-gradient(90deg, var(--accent), var(--accent3))",
-                      borderRadius: "2px",
-                      transform: "scaleX(0)",
-                      transformOrigin: "left",
+                      borderRadius: "4px",
                     }}
                   />
                 </div>
@@ -116,9 +114,9 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "space-between",
   },
   skillBar: {
-    height: "3px",
+    height: "24px",
     background: "var(--border)",
-    borderRadius: "2px",
+    borderRadius: "4px",
     overflow: "hidden",
   },
 };
