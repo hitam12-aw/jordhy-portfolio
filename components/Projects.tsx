@@ -16,11 +16,10 @@ type Project = {
 const projects: Project[] = [
   {
     type: "Web App",
-    title: "Project Pertama",
-    desc: "Deskripsi singkat project kamu. Apa yang dibangun, masalah apa yang diselesaikan, dan apa yang kamu pelajari dari sini.",
-    tags: ["React", "Tailwind", "API"],
-    demo: "#",
-    github: "#",
+    title: "Sistem Pengaduan Masyarakat Desa Lajer",
+    desc: "Sistem Pengaduan Masyarakat Desa Lajer adalah sebuah web application yang dibuat untuk memudahkan warga Desa Lajer dalam menyampaikan keluhan, aspirasi, dan masukan kepada perangkat desa secara online.",
+    tags: ["Laravel", "Tailwind", "Laravel Brezee","MYSQL"],
+    github: "https://github.com/hitam12-aw/pengaduan-desa-lajer",
     icon: "🧱",
   },
   {
