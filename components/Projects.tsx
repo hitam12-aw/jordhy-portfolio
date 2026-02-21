@@ -23,12 +23,11 @@ const projects: Project[] = [
     icon: "🧱",
   },
   {
-    type: "Landing Page",
-    title: "Project Kedua",
-    desc: "Deskripsi project kamu yang kedua. Ceritakan teknologi apa yang dipakai dan apa hasilnya secara singkat dan jelas.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    demo: "#",
-    github: "#",
+    type: "Web App",
+    title: "Sistem Absensi Organisasi",
+    desc: "Aplikasi absensi berbasis QR Code untuk organisasi mahasiswa. Mendukung multi-organisasi dengan role Admin dan Anggota",
+    tags: ["Next.js", "TypeScript", "Prisma", "MySQL", "NextAuth", "Tailwind CSS"],
+    github: "https://github.com/hitam12-aw/absensi-organisasi",
     icon: "🌿",
   },
   {
